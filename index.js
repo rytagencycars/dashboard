@@ -9,7 +9,6 @@ const LOCATION_ID = 'FPa1edMih64zzU5Ioviz';
 
 app.get('/api/ventas', async (req, res) => {
   try {
-    // Usamos POST para el endpoint de búsqueda
     const response = await fetch(`https://services.leadconnectorhq.com/opportunities/search`, {
       method: 'POST',
       headers: {
@@ -18,12 +17,11 @@ app.get('/api/ventas', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        location_id: LOCATION_ID
+        locationId: LOCATION_ID // <-- ¡Esta es la corrección!
       })
     });
     
     if (!response.ok) {
-      // Si falla, leemos el error exacto de la API
       const errorText = await response.text();
       console.error('Detalle del error de la API:', response.status, errorText);
       throw new Error(`Error ${response.status}: ${errorText}`);
